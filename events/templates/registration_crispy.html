@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block body_block %}
+<h4>Sign-up Here</h4>
+<!-- <form action="{% url 'register' %}" method="post" class="form-horizontal"> -->
+    <legend>JOIN HERE</legend>
+    <form class="form-signin span8" id="user_form" method="post" action="{% url 'register' %}"
+        enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2 class="form-signin-heading">Sign up Here</h2>
+        <!-- Display each form here -->
+
+        {% for field in form.visible_fields %}
+            {{ field.errors }}
+            {{ field.label }}
+            {{ field.help_text }}<br />
+            {{ field }}<br />
+        {% endfor %}
+
+        {% for field in form2.visible_fields %}
+            {{ field.errors }}
+            {{ field.label }}
+            {{ field.help_text }}<br />
+            {{ field }}<br />
+        {% endfor %}
+
+        <br />
+        <!-- Provide a button to click to submit the form.-->
+        <input class="btn btn-primary" type="submit" name="submit" value="Register"/>
+     </form>
+{% endblock %}

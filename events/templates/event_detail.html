@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load comments %}
+
+{% block body_block %}
+<style>
+  #id_honeypot {
+    display: none;
+  }
+</style>
+<hr>
+<hr>
+
+<h2>{{ object.name }}</h2>
+
+
+<div class="desc">
+  {{ object.date }}
+</div>
+
+{% if object.user == user %}
+  <a href="{% url 'update_event' pk=object.pk %}">Edit</a> | 
+  <a href="{% url 'delete_event' pk=object.pk %}">Delete</a>
+{% endif %}
+
+<div class="comments">
+  <h3>Comments</h3>
+
+  <div class="comment_form">
+{% if user.is_authenticated %}
+  {% get_comment_form for object as form %}
+  <form action="{% comment_form_target %}" method="POST">
+    {% csrf_token %}
+    {{ form.comment }}
+    {{ form.honeypot }}
+    {{ form.content_type }}
+    {{ form.object_pk }}
+    {{ form.timestamp }}
+    {{ form.security_hash }}
+    <input type="hidden" name="name" value="{{ user }}" />
+    <input type="hidden" name="email" value="{{ user.email|default:'d@ummy.com' }}" />
+    <input type="hidden" name="url" value="" />
+    <input type="hidden" name="next" 
+	   value="{% url 'event_detail' pk=object.pk %}" />
+    <input type="submit" value="Add comment" id="id_submit" />
+  </form>
+{% else %}
+  <p>Please <a href="{% url 'user_login' %}">log in
+  </a> to leave a comment.</p>
+{% endif %}
+  </div>
+  {% render_comment_list for object %}
+</div>
+
+
+
+{% endblock %}

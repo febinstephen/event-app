@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block body_block %}
+<div class="hero-unit">
+    <h1>Event Posting</h1>
+    <p>Plan Events and Have Fun</p>
+</div>
+
+<div class="row-fluid">
+    <div class="span6">
+        <h2>Events</h2>
+        {% if events %}
+        <ul>
+            {% for event in events %}
+            <li><a href="{% url 'event_detail' event.pk %}">{{ event.name }}</a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <strong>No events at present.</strong>
+        {% endif %}
+
+    </div>
+    <!--/span-->
+</div>
+<!--/row-->
+{% endblock %}

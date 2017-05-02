@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load comments %}
+
+{% block body_block %}
+<br>
+<br>
+<br>
+<ul class="nav nav-list">
+{% for object in object_list %}
+	<li><a href="{% url 'event_detail' pk=object.pk %}"><b>{{ object.name }}</b>
+	{% get_comment_count for object as comment_count %}
+	{{ comment_count }} comment {{ comment_count|pluralize }} 
+	</a>
+	{{ object.date }}</li>
+{% endfor %}
+</ul>
+{% endblock %}
+

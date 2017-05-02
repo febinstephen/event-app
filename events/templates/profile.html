@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+    <!-- this div will house the navigation side bar and main content pane -->
+    {% block body_block %}
+    <div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span3">
+            <div class="well sidebar-nav">
+              <ul class="nav nav-list">
+              <li class="nav-header">Sidebar</li>
+                <!-- add profile photo here -->
+              <li class="active"><img src="{{ picture_url }}"></li>
+                <!--- Empty for the timebeing -->
+            </div>
+            <!--/.well -->
+        </div>
+        <!--/span-->
+    </div>
+    <!--/row-->
+</div>
+<!--/.fluid-container-->
+{% endblock %}
